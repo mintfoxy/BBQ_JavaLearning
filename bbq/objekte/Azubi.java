@@ -1,4 +1,4 @@
-package bbq_repeat.objekte;
+package bbq.objekte;
 
 public class Azubi {
 

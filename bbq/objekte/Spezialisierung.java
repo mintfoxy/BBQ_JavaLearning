@@ -1,10 +1,10 @@
-package bbq_repeat.objekte;
+package bbq.objekte;
 
 public class Spezialisierung {
 
     private int id;
     private String bezeichnung;
-    public int id_fach;
+    private Fach fach;  //  Foreign Key in unserer Tabelle, 1:1, eine Spezialisierung gehört zu einem Fach      
 
     public int getId(){
         return id;
@@ -27,17 +27,24 @@ public class Spezialisierung {
 
     }
 
-    public Spezialisierung(int id, String bezeichnung, int id_fach){
+    public Fach getFach(){
+        return fach;
+    }
+
+    public void setFach(Fach fach){
+        this.fach = fach;
+    }
+
+    public Spezialisierung(int id, String bezeichnung, Fach fach){
         super();
         this.id = id;
         this.bezeichnung = bezeichnung;
-        this.id_fach = id_fach;
+        this.fach = fach;
     }
 
     @Override
     public String toString(){
-        String str = "Spezialisierung " + bezeichnung + " id " + id;
-        return str;
+        return bezeichnung + " id " + id + " fach " + fach.getId();
     }
 
 }

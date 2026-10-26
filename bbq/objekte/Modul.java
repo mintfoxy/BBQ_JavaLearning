@@ -1,4 +1,4 @@
-package bbq_repeat.objekte;
+package bbq.objekte;
 
 public class Modul {
 
@@ -27,7 +27,7 @@ public class Modul {
 
     }
 
-    public Modul(int id, String bezeichnung, int id_fach, int id_spezialisierung){
+    public Modul(int id, String bezeichnung, int id_spezialisierung){
         super();
         this.id = id;
         this.modul_name = bezeichnung;
