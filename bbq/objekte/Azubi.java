@@ -2,32 +2,72 @@ package bbq.objekte;
 
 public class Azubi {
 
-    int id;
-    String name;
-    String vorname;
-    int id_spezialisierung;
-    int id_fach;
-    int id_gruppe;
+	private int id;
+	private String name;
+	String vorname;
+	private Spezialisierung spezialisierung;
+	private Gruppe gruppe;
 
-    public Azubi(){
+	public Azubi() {
+		super();
+	}
 
-    }
+	public Azubi(int id, String name, String vorname, Spezialisierung spezialisierung, Gruppe gruppe) {
 
-    public Azubi(int id, String name, String vorname, int id_fach, int id_spezialisierung, int id_gruppe){
-        super();
-        this.id = id;
-        this.name = name;
-        this.vorname = vorname;
-        this.id_fach = id_fach;
-        this.id_spezialisierung = id_spezialisierung;
-        this.id_gruppe = id_gruppe;
-    }
+		super();
+		this.id = id;
+		this.name = name;
+		this.vorname = vorname;
+		this.spezialisierung = spezialisierung;
+		this.gruppe = gruppe;
+	}
 
-    @Override
-    public String toString(){
-        String str = "Azubi " + vorname + name + "\n";
-        return str;
-    }
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getVorname() {
+		return vorname;
+	}
+
+	public void setVorname(String vorname) {
+		this.vorname = vorname;
+	}
+
+	public Spezialisierung getSpezialisierung() {
+		return spezialisierung;
+	}
+
+	public void setSpezialisierung(Spezialisierung spezialisierung) {
+		this.spezialisierung = spezialisierung;
+	}
+
+	public Gruppe getGruppe() {
+		return gruppe;
+	}
+
+	public void setGruppe(Gruppe gruppe) {
+		this.gruppe = gruppe;
+	}
+
+	@Override
+	public String toString() {
+		String str = name + vorname + "\n";
+		str += "Gruppe " + gruppe.getId() + "\n";
+		str += "Spezialisierung" + spezialisierung.getBezeichnung();
+		return str;
+	}
 
 }

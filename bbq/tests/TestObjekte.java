@@ -37,7 +37,7 @@ public class TestObjekte {
         Spezialisierung spezi2 = new Spezialisierung(2, "SI", fach1);    //  Konstruktor aus der Klasse Spezialisierung
         Spezialisierung spezi3 = new Spezialisierung(3, "DA", fach1);
 
-        Modul modul1 = new Modul(1, "WISO", spezi1.getId());
+        Modul modul1 = new Modul(1, "WISO", spezi1);
 
 
 

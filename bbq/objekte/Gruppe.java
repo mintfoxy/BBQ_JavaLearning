@@ -1,9 +1,28 @@
 package bbq.objekte;
 
+import java.util.ArrayList;
+
 public class Gruppe {
 
     private int id;
     private String gruppe_name;
+
+    private ArrayList<Azubi> teilnehmer;
+
+    public String addAzubi(Azubi tn){ //  diese Methode fügt das Objekt Azubi zu der Liste
+
+        if (teilnehmer == null)  //  prüfe, die Liste noch leer ist
+            teilnehmer = new ArrayList<Azubi>();   //  erzeuge eine Liste
+
+        if (teilnehmer.contains(tn)){   //  prüfe, ob der Eintrag bereits vorhanden ist
+            return "Das Objekt ist bereits in der Liste";
+        }
+
+        teilnehmer.add(tn);  //  adde ihn zur Liste
+
+        return null;    //  gibt nichts/null zurück, wenn alles ok war
+
+    }
 
     public int getId(){
         return id;

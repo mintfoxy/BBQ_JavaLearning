@@ -2,42 +2,48 @@ package bbq.objekte;
 
 public class Modul {
 
-    private int id;
-    private String modul_name;
-    public int id_spezialisierung;
+	private int id;
+	private String bezeichnung;
+	private Spezialisierung spezialisierung;
 
-    public int getId(){
-        return id;
-    }
+	public Modul() {
+		super();
+	}
 
-    public void setId(int id){
-        this.id = id;
-    }
+	public Modul(int id, String bezeichnung, Spezialisierung spezialisierung) {
+		super();
+		this.id = id;
+		this.bezeichnung = bezeichnung;
+		this.spezialisierung = spezialisierung;
+	}
 
-    public String getModul_Name(){
-        return modul_name;
+	public int getId() {
+		return id;
+	}
 
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setModul_Name(String modul_name){
-        this.modul_name = modul_name;
-    }
+	public String getBezeichnung() {
+		return bezeichnung;
+	}
 
-    public Modul(){
+	public void setBezeichnung(String bezeichnung) {
+		this.bezeichnung = bezeichnung;
+	}
 
-    }
+	public Spezialisierung getSpezialisierung() {
+		return spezialisierung;
+	}
 
-    public Modul(int id, String bezeichnung, int id_spezialisierung){
-        super();
-        this.id = id;
-        this.modul_name = bezeichnung;
-        this.id_spezialisierung = id_spezialisierung;
-    }
+	public void setSpezialisierung(Spezialisierung spezialisierung) {
+		this.spezialisierung = spezialisierung;
+	}
 
-    @Override
-    public String toString(){
-        String str = "Modul " + modul_name + " id " + id;
-        return str;
-    }
+	@Override
+	public String toString() {
+		return bezeichnung + " id " + id + " spezialisierung " + spezialisierung.getBezeichnung();
+	}
 
 }
