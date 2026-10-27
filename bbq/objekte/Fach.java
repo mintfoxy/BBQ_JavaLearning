@@ -6,9 +6,8 @@ import java.util.ArrayList;
  * Entspricht der Tabelle Fach in unserer Datenbank
  */
 
-public class Fach {
+public class Fach extends BBQObject{
 
-    private int id;
     private String fach_name;
     //  zu einem Fach gehören mehrere Spezialisierungen
     //  mehrere bedeutet []
@@ -24,28 +23,17 @@ public class Fach {
             return "Das Objekt ist bereits in der Liste";
         }
 
+        sp.setFach(this);   //  dieses Fach ist dein Fach; Fach darf nicht in der Datenbank null sein
+
         spezialisierungen.add(sp);  //  adde ihn zur Liste
 
         return null;    //  gibt nichts/null zurück, wenn alles ok war
 
     }
 
-
-    public Fach(){  //  Standardkonstruktor ohne Parameter
-
-    }
-
     public Fach(int id, String bezeichnung){    //  Konstruktor mit Parametern; erzeugt eine Instanz der Klasse Fach
-        this.id = id;
+        super(id);
         this.fach_name = bezeichnung;
-    }
-
-    public int getId(){
-        return id;
-    }
-
-    public void setId(int id){
-        this.id = id;
     }
 
     public String getFach_Name(){
@@ -64,7 +52,7 @@ public class Fach {
     @Override   //  wir überschreiben die Methode toString der Klasse Object, sodass wir die Darstellung an uns anpassen
     public String toString(){
 
-        String str = "Fach " + fach_name + " id " + id;
+        String str = "Fach " + fach_name + " id " + id + " Spezialisierungen: " + spezialisierungen.toString();
         return str;
     }
 

@@ -2,14 +2,13 @@ package bbq.objekte;
 
 import java.util.ArrayList;
 
-public class Gruppe {
+public class Gruppe extends BBQObject{
 
-    private int id;
     private String gruppe_name;
 
     private ArrayList<Azubi> teilnehmer;
 
-    public String addAzubi(Azubi tn){ //  diese Methode fügt das Objekt Azubi zu der Liste
+    public String addTeilnehmer(Azubi tn){ //  diese Methode fügt das Objekt Azubi zu der Liste
 
         if (teilnehmer == null)  //  prüfe, die Liste noch leer ist
             teilnehmer = new ArrayList<Azubi>();   //  erzeuge eine Liste
@@ -18,18 +17,12 @@ public class Gruppe {
             return "Das Objekt ist bereits in der Liste";
         }
 
+        tn.setGruppe(this); //  das ist deine Gruppe
+
         teilnehmer.add(tn);  //  adde ihn zur Liste
 
         return null;    //  gibt nichts/null zurück, wenn alles ok war
 
-    }
-
-    public int getId(){
-        return id;
-    }
-
-    public void setId(int id){
-        this.id = id;
     }
 
     public String getGruppe_name(){
@@ -41,13 +34,8 @@ public class Gruppe {
         this.gruppe_name = gruppe_name;
     }
 
-    public Gruppe(){
-
-    }
-
     public Gruppe(int id, String gruppe_name){
-        super();
-        this.id = id;
+        super(id);
         this.gruppe_name = gruppe_name;
     }
 

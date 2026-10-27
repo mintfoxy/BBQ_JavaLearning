@@ -1,28 +1,14 @@
 package bbq.objekte;
 
-public class Modul {
+public class Modul extends BBQObject{
 
-	private int id;
 	private String bezeichnung;
 	private Spezialisierung spezialisierung;
 
-	public Modul() {
-		super();
-	}
-
-	public Modul(int id, String bezeichnung, Spezialisierung spezialisierung) {
-		super();
+	public Modul(int id, String bezeichnung) {
+		super(id);
 		this.id = id;
 		this.bezeichnung = bezeichnung;
-		this.spezialisierung = spezialisierung;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getBezeichnung() {
