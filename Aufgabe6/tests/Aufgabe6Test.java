@@ -9,8 +9,6 @@ public class Aufgabe6Test {
 
     public static void main(String[] args) {
 
-        Klub k = createKlub(1);
-
         Mannschaft m = createMannschaft(1, "TestMannschaft");
 
         Spieler spieler1 = new Spieler(1, "Potter", "Harry", 10, Spielerrolle.MITTELFELD);
