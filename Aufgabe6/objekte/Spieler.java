@@ -55,5 +55,4 @@ public class Spieler extends Klub{
         this.nummer = nummer;
         this.rolle = rolle;
     }
-
 }

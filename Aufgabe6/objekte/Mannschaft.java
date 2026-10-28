@@ -7,6 +7,7 @@ public class Mannschaft extends Klub{
     private String name_mannschaft;
 
     private ArrayList<Spieler> player;  //  in diesem Array dürfen nur die Objekte der Klasse Spieler gespeichert werden
+
     private ArrayList<Trainer> trainer; //  in diesem Array dürfen nur die Objekte der Klasse Trainer gespeichert werden
 
     public Mannschaft(int id, String bezeichnung) {
@@ -29,7 +30,7 @@ public class Mannschaft extends Klub{
 
     }
 
-    public String addTrainer(Trainer trnr){ //  diese Methode fügt ein Objekt Spieler zu der Liste hinzu
+    public String addTrainer(Trainer trnr){ //  diese Methode fügt ein Objekt Trainer zu der Liste hinzu
 
         if (trainer == null)  //  prüfe, die Liste noch leer ist
             trainer = new ArrayList<Trainer>();   //  erzeuge eine Liste
@@ -50,6 +51,22 @@ public class Mannschaft extends Klub{
 
     public void setName_mannschaft(String name_mannschaft) {
         this.name_mannschaft = name_mannschaft;
+    }
+
+    public ArrayList<Spieler> getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(ArrayList<Spieler> player) {
+        this.player = player;
+    }
+
+    public ArrayList<Trainer> getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(ArrayList<Trainer> trainer) {
+        this.trainer = trainer;
     }
 
 }
