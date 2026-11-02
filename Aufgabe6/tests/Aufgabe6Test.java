@@ -21,7 +21,7 @@ public class Aufgabe6Test {
         m.addSpieler(spieler2);
         m.addSpieler(spieler3);
 
-        for (Spieler splr : m.getPlayer()) {
+        for (Spieler splr : m.getPlayer()) {    //  suche im Array der Klasse Spieler, Mannschaft m; getPlayer aus der Klasse manschaft
 
             if (splr.getRolle() == Spielerrolle.MITTELFELD) {
 

@@ -2,58 +2,59 @@ package bbq.objekte;
 
 import java.util.ArrayList;
 
-/**
- * Entspricht der Tabelle Fach in unserer Datenbank
- */
+public class Fach extends BBQObject {
 
-public class Fach extends BBQObject{
+    private String fach_name; // Speichert den Namen des Faches.
 
-    private String fach_name;
-    //  zu einem Fach gehören mehrere Spezialisierungen
-    //  mehrere bedeutet []
+    private ArrayList<Spezialisierung> spezialisierungen = // Deklariert eine Liste, die Spezialisierung-Objekte aufnehmen kann.
+            new ArrayList<>(); // Erzeugt sofort eine leere Liste; das Feld ist dadurch nicht null.
 
-    private ArrayList<Spezialisierung> spezialisierungen;   //  Liste mit Spezialisierungen eines Faches
+    public Fach(int id, String bezeichnung) { // Konstruktor mit ID und Fachbezeichnung.
+        super(id); // Übergibt die ID an den Konstruktor der Elternklasse.
+        this.fach_name = bezeichnung; // Speichert die Bezeichnung als Fachnamen.
+    }
 
-    public String addSpezialisierung(Spezialisierung sp){ //  diese Methode fügt das Objekt Spezialisierung zu der Liste
+    @Override // Implementiert die abstrakte Methode aus BBQObject.
+    protected String getFileName() { // Liefert den Dateinamen für Fächer.
+        return "faecher.csv"; // Gibt den Namen der Datei zurück.
+    }
 
-        if (spezialisierungen == null)  //  prüfe, die Liste noch leer ist
-            spezialisierungen = new ArrayList<Spezialisierung>();   //  erzeuge eine Liste
+    @Override // Implementiert die abstrakte Methode getData.
+    protected String getData() { // Erstellt die zu speichernde Datenzeile.
+        return id + ";" + fach_name; // Verbindet ID und Fachnamen mit einem Semikolon.
+    }
 
-        if (spezialisierungen.contains(sp)){   //  prüfe, ob der Eintrag bereits vorhanden ist
-            return "Das Objekt ist bereits in der Liste";
+    public String addSpezialisierung(Spezialisierung sp) { // Fügt eine Spezialisierung hinzu und gibt bei Problemen einen Meldungstext zurück.
+        if (sp == null) { // Prüft, ob statt eines Objekts null übergeben wurde.
+            return "Die Spezialisierung darf nicht null sein"; // Beendet die Methode sofort mit einer Fehlermeldung.
         }
 
-        sp.setFach(this);   //  dieses Fach ist dein Fach; Fach darf nicht in der Datenbank null sein
+        if (spezialisierungen.contains(sp)) { // Prüft, ob die Liste diese Spezialisierung bereits enthält.
+            return "Das Objekt ist bereits in der Liste"; // Beendet die Methode, ohne das Objekt erneut hinzuzufügen.
+        }
 
-        spezialisierungen.add(sp);  //  adde ihn zur Liste
+        sp.setFach(this); // Ordnet der Spezialisierung dieses Fach-Objekt zu.
+        spezialisierungen.add(sp); // Speichert die Referenz auf die Spezialisierung in der Liste.
 
-        return null;    //  gibt nichts/null zurück, wenn alles ok war
-
+        return null; // Bedeutet hier: Das Hinzufügen war erfolgreich, es gibt keine Fehlermeldung.
     }
 
-    public Fach(int id, String bezeichnung){    //  Konstruktor mit Parametern; erzeugt eine Instanz der Klasse Fach
-        super(id);
-        this.fach_name = bezeichnung;
+    public String getFach_Name() { // Getter für den Fachnamen.
+        return fach_name; // Gibt den gespeicherten Fachnamen zurück.
     }
 
-    public String getFach_Name(){
-        return fach_name;
-
+    public void setFach_Name(String fach_name) { // Setter für den Fachnamen.
+        this.fach_name = fach_name; // Speichert den neuen Fachnamen.
     }
 
-    public void setFach_Name(String fach_name){
-        this.fach_name = fach_name;
+    public ArrayList<Spezialisierung> getSpezialisierungen() { // Getter für die Liste der Spezialisierungen.
+        return spezialisierungen; // Gibt die tatsächliche Liste zurück, keine Kopie.
     }
 
-    public ArrayList<Spezialisierung> getSpezialisierungen(){
-        return spezialisierungen;
+    @Override // Überschreibt die Methode toString aus Object.
+    public String toString() { // Erstellt eine lesbare Darstellung des Faches.
+        return "Fach " + fach_name // Beginnt den String mit dem Fachnamen.
+                + " id " + id // Ergänzt die ID.
+                + " Spezialisierungen: " + spezialisierungen; // Ergänzt die Liste; dabei werden die Elemente über toString dargestellt.
     }
-
-    @Override   //  wir überschreiben die Methode toString der Klasse Object, sodass wir die Darstellung an uns anpassen
-    public String toString(){
-
-        String str = "Fach " + fach_name + " id " + id + " Spezialisierungen: " + spezialisierungen.toString();
-        return str;
-    }
-
 }
