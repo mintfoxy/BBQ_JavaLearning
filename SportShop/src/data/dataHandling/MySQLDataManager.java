@@ -35,11 +35,11 @@ public class MySQLDataManager implements DataManager {
 
     private MySQLDataManager() { // lädt die Einstellungen beim Erstellen des Managers
 
-        Properties properties = new Properties(); // sammelt die Einstellungen aus der Datei
+        Properties properties = new Properties(); // Objekt sammelt die Einstellungen aus der Datei
 
-        try (FileReader reader = new FileReader("database.properties")) { // öffnet die Datei im Arbeitsverzeichnis
+        try (FileReader reader = new FileReader("database.properties")) { // öffnet die Datei mit Werten
 
-            properties.load(reader); // liest die Schlüssel und Werte aus der Datei
+            properties.load(reader); // liest die Werte aus der Datei
 
         } catch (IOException exception) { // behandelt Fehler beim Öffnen oder Lesen
             throw new IllegalStateException("Datenbankkonfiguration konnte nicht geladen werden", exception); // beendet
@@ -49,9 +49,9 @@ public class MySQLDataManager implements DataManager {
                                                                                                               // Managers
         }
 
-        url = properties.getProperty("db.url"); // liest die Datenbankadresse
-        user = properties.getProperty("db.user"); // liest den Benutzernamen
-        password = properties.getProperty("db.password"); // liest das Passwort
+        url = properties.getProperty("db.url"); // Adresse
+        user = properties.getProperty("db.user"); // Login
+        password = properties.getProperty("db.password"); // Passwort
 
         if (url == null || url.isBlank()
                 || user == null || user.isBlank()
@@ -148,10 +148,13 @@ public class MySQLDataManager implements DataManager {
 
             return articles; // liefert die geladenen Artikel oder eine leere Liste
 
-        } catch (SQLException | IllegalArgumentException exception) { // fängt Datenbankfehler und ungültige Enum-Namen
-                                                                      // ab
-            IO.println("Fehler beim Lesen der Artikel: " + exception.getMessage()); // zeigt die Fehlerbeschreibung
-            return null; // meldet einen Lesefehler an Main
+        } catch (SQLException exception) { // fängt Fehler beim Zugriff auf die Datenbank ab
+            IO.println("Datenbankfehler: " + exception.getMessage());
+            return null;
+
+        } catch (IllegalArgumentException exception) { // fängt ungültige Enum-Namen ab
+            IO.println("Ungültige Artikeldaten: " + exception.getMessage());
+            return null;
         }
     }
 
