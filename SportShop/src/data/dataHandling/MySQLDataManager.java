@@ -61,34 +61,6 @@ public class MySQLDataManager implements DataManager {
         }
     }
 
-    private static final String INSERT_ARTICLE = "INSERT INTO articles (article_number, sport_type, manufacturer_id, designation) "
-            + "VALUES (?, ?, ?, ?)"; // fügt einen Artikel mit der ID seines Herstellers ein
-
-    private static final String UPDATE_ARTICLE = "UPDATE articles SET article_number = ?, sport_type = ?, "
-            + "manufacturer_id = ?, designation = ? WHERE id = ?"; // aktualisiert den Artikel mit der angegebenen ID
-
-    private static final String SELECT = "SELECT articles.id, articles.article_number, articles.sport_type, "
-            + "articles.manufacturer_id, articles.designation, "
-            + "manufacturer.name AS manufacturer_name "
-            + "FROM articles "
-            + "JOIN manufacturer ON articles.manufacturer_id = manufacturer.id "
-            + "ORDER BY articles.id"; // verbindet die Artikel mit ihren Herstellern
-
-    private static final String SELECT_MANUFACTURER = "SELECT id, name FROM manufacturer ORDER BY id"; // liest alle
-                                                                                                       // Hersteller
-                                                                                                       // nach ihrer ID
-
-    private static final String DELETE = "DELETE FROM articles WHERE id = ?"; // löscht den Artikel mit der angegebenen
-                                                                              // ID
-
-    private static final String SELECT_ARTICLE_WITH_MANUFACTURER = "SELECT articles.id, articles.article_number, articles.sport_type, "
-            + "articles.manufacturer_id, articles.designation, "
-            + "manufacturer.name AS manufacturer_name "
-            + "FROM articles "
-            + "JOIN manufacturer ON articles.manufacturer_id = manufacturer.id "
-            + "WHERE manufacturer_id = ?" // alle Artikel auswählen, die zu einem bestimmten Hersteller gehören
-            + "ORDER BY articles.id";
-
     /**
      * prüft die Verbindung zur MySQL-Datenbank
      *
@@ -111,7 +83,9 @@ public class MySQLDataManager implements DataManager {
         List<Article> articles = new ArrayList<>(); // sammelt die geladenen Artikel
 
         try (Connection connection = DriverManager.getConnection(url, user, password); // öffnet die Verbindung
-                PreparedStatement statement = connection.prepareStatement(SELECT); // bereitet die Abfrage vor
+                PreparedStatement statement = connection.prepareStatement(MySQLConstants.SELECT_ARTICLE); // bereitet
+                                                                                                          // die Abfrage
+                                                                                                          // vor
                 ResultSet result = statement.executeQuery()) { // führt die Abfrage aus
 
             while (result.next()) { // geht die gefundenen Zeilen durch
@@ -179,8 +153,9 @@ public class MySQLDataManager implements DataManager {
         if (article.getId() > 0) { // erkennt einen bereits gespeicherten Artikel
 
             try (Connection connection = DriverManager.getConnection(url, user, password); // öffnet die Verbindung
-                    PreparedStatement statement = connection.prepareStatement(UPDATE_ARTICLE)) { // bereitet den
-                                                                                                 // UPDATE-Befehl vor
+                    PreparedStatement statement = connection.prepareStatement(MySQLConstants.UPDATE_ARTICLE)) { // bereitet
+                                                                                                                // den
+                // UPDATE-Befehl vor
 
                 statement.setString(1, article.getArticleNumber()); // setzt die Artikelnummer
                 statement.setString(2, article.getSportType().name()); // setzt den Namen der Enum Konstante
@@ -199,7 +174,8 @@ public class MySQLDataManager implements DataManager {
 
             try (Connection connection = DriverManager.getConnection(url, user, password); // öffnet die Verbindung
                     PreparedStatement statement = connection.prepareStatement(
-                            INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS)) { // fordert die von MySQL erzeugte ID an
+                            MySQLConstants.INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS)) { // fordert die von MySQL
+                                                                                               // erzeugte ID an
 
                 statement.setString(1, article.getArticleNumber()); // setzt die Artikelnummer
                 statement.setString(2, article.getSportType().name()); // setzt den Namen der Enum-Konstante
@@ -239,7 +215,10 @@ public class MySQLDataManager implements DataManager {
         }
 
         try (Connection connection = DriverManager.getConnection(url, user, password); // öffnet die Verbindung
-                PreparedStatement statement = connection.prepareStatement(DELETE)) { // bereitet den DELETE-Befehl vor
+                PreparedStatement statement = connection.prepareStatement(MySQLConstants.DELETE_ARTICLE)) { // bereitet
+                                                                                                            // den
+                                                                                                            // DELETE-Befehl
+                                                                                                            // vor
 
             statement.setInt(1, article.getId()); // bestimmt den Artikel für die WHERE-Bedingung
 
@@ -260,8 +239,10 @@ public class MySQLDataManager implements DataManager {
         List<Manufacturer> manufacturers = new ArrayList<>(); // sammelt die geladenen Hersteller
 
         try (Connection connection = DriverManager.getConnection(url, user, password); // öffnet die Verbindung
-                PreparedStatement statement = connection.prepareStatement(SELECT_MANUFACTURER); // bereitet die Abfrage
-                                                                                                // vor
+                PreparedStatement statement = connection.prepareStatement(MySQLConstants.SELECT_MANUFACTURER); // bereitet
+                                                                                                               // die
+                                                                                                               // Abfrage
+                // vor
                 ResultSet result = statement.executeQuery()) { // führt die Abfrage aus
 
             while (result.next()) { // geht die gefundenen Zeilen durch
@@ -297,7 +278,8 @@ public class MySQLDataManager implements DataManager {
         }
 
         try (Connection connection = DriverManager.getConnection(url, user, password);
-                PreparedStatement statement = connection.prepareStatement(SELECT_ARTICLE_WITH_MANUFACTURER)) {
+                PreparedStatement statement = connection
+                        .prepareStatement(MySQLConstants.SELECT_ARTICLE_WITH_MANUFACTURER)) {
 
             statement.setInt(1, manufacturer.getId());
 
