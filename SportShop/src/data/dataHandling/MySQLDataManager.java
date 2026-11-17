@@ -36,7 +36,7 @@ public class MySQLDataManager implements DataManager {
     private MySQLDataManager() { // lädt die Einstellungen beim Erstellen des Managers
 
         Properties properties = new Properties(); // Objekt sammelt die Einstellungen aus der Datei
-
+        System.out.println(new java.io.File("database.properties").getAbsolutePath()); // zeigt den Pfad zur Konfigurationsdatei an
         try (FileReader reader = new FileReader("database.properties")) { // öffnet die Datei mit Werten
 
             properties.load(reader); // liest die Werte aus der Datei
