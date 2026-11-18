@@ -7,9 +7,9 @@ import javax.swing.JFrame;
 
 import data.dataHandling.MySQLDataManager;
 
-public class BaseFrame extends JFrame { // erweitert JFrame um die Einstellungen und Inhalte der Anwendung
+public class BaseFrame extends JFrame {
 
-    public static void main(String[] args) { // startet die Anwendung
+    public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> new BaseFrame()); // plant die Erstellung des Fensters im Event Dispatch Thread (Swing Ereignisthread) ein
     }
